@@ -1,0 +1,32 @@
+# font parameters
+DEFAULT_FONT = 'times.ttf'
+MIN_FONT_SIZE = 6
+SIZE_STEP = 2
+SPACING = 10
+
+# text box parameters
+DEFAULT_TEXT_FONT_SIZE = 14
+MAX_TEXT_WIDTH = 100
+MAX_TEXT_HEIGHT = 100
+
+# name box parameters
+DEFAULT_NAME_FONT_SIZE = 20
+MAX_NAME_WIDTH = 100
+MAX_NAME_HEIGHT = 30
+
+# artist box parameters
+DEFAULT_ARTIST_FONT_SIZE = 14
+MAX_ARTIST_WIDTH = 100
+MAX_ARTIST_HEIGHT = 20
+ARTIST_STRING = 'худ.'
+
+# power box parameters
+DEFAULT_POWER_FONT_SIZE = 30
+MAX_POWER_WIDTH = 50
+
+# icon box parameters
+ICON_PATH = '//'
+
+# troubleshooting
+TOO_LARGE_STRING = '***TOO LARGE TO DISPLAY***'
+INVALID_NUMBER = -1
