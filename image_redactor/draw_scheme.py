@@ -14,9 +14,9 @@ class DrawScheme:
         self.type = None
         self.king_table = None
         if default_init:
-            self.DefaultInit()
+            self.default_init()
 
-    def DefaultInit(self):
+    def default_init(self):
         self.power = PowerBox(self.reference['power'])
         self.name = NameBox(self.draw, self.reference['name'])
         self.text = TextBox(self.draw, self.reference['text'])

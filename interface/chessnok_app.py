@@ -9,5 +9,5 @@ class ChessnokApp(wx.App):
         self.main_frame = MainFrame()
         self.main_frame.Show()
 
-    def BindHotkeys(self):
+    def bind_hotkeys(self):
         pass
