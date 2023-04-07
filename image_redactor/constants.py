@@ -1,13 +1,13 @@
 # font parameters
 DEFAULT_FONT = 'times.ttf'
-MIN_FONT_SIZE = 6
+MIN_FONT_SIZE = 16
 SIZE_STEP = 2
 SPACING = 10
 
 # text box parameters
-DEFAULT_TEXT_FONT_SIZE = 14
-MAX_TEXT_WIDTH = 100
-MAX_TEXT_HEIGHT = 100
+DEFAULT_TEXT_FONT_SIZE = 30
+MAX_TEXT_WIDTH = 300
+MAX_TEXT_HEIGHT = 200
 
 # name box parameters
 DEFAULT_NAME_FONT_SIZE = 20
@@ -21,7 +21,7 @@ MAX_ARTIST_HEIGHT = 20
 ARTIST_STRING = 'худ.'
 
 # power box parameters
-DEFAULT_POWER_FONT_SIZE = 30
+DEFAULT_POWER_FONT_SIZE = 40
 MAX_POWER_WIDTH = 50
 
 # icon box parameters
