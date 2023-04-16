@@ -6,7 +6,7 @@ The app starts from opening main.py in project's folder.
 
 Insruction for interface:
 1. File at the top-left corner currently does nothing.
-2. You can upload your own image by giving the file path at first line or by browsing it after clicking a nearby button. If your image smaller than 515х703 px, then it will be replaced by default image of bubble Sindzi. Currently only png, jpg, and jpeg files are supported.
+2. You can upload your own image by giving the file path at first line or by browsing it after clicking a nearby button. If your image smaller than 515х703 px, then it will be replaced by default image of bubble Sindzi. Currently only png files are supported.
 3. There are 3 inputs for power, name and text. The length of word and height of whole input are restrained, but it should be enough for not-overwhelming card. Text and name are kinda flexible and should shrink if input is too big, but there are shrink limits. You may adjust these limits, spacing, font and font size at image_redacor/constants.py.
 4. Little hint: you can press tab and print number to make rectangle followed by the number simulating the card draw symbol :)
 5. Loaded image can be moved by arrow keys. The movements is restrained by the fact, that card face should be placed fully inside the image. The speed of scrolling is also can be adjusted at interface/settings.py.
