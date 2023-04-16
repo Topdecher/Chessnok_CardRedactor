@@ -22,7 +22,6 @@ class MainFrame(wx.Frame):
         self.card_panel.SetBackgroundColour(wx.WHITE)
         self.input_panel = InputPanel(self.main_panel, pos=(0, 0), size=(self.GetSize()[0] // 2, self.GetSize()[1]))
         self.input_panel.SetName('input_panel')
-        self.input_panel.SetBackgroundColour(wx.GREEN)
 
     def create_menu_bar(self):
         menubar = wx.MenuBar()
