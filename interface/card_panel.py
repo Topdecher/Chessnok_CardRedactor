@@ -6,6 +6,7 @@ from interface.settings import *
 
 
 class CardPanel(wx.Panel):
+    """represents the right side of app where the card is showed"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
@@ -15,6 +16,7 @@ class CardPanel(wx.Panel):
         self.bind_events()
 
     def init_card(self):
+        """creates card and setups default face"""
         pos_x = self.GetSize()[0] - CARD_RIGHT_GAP - CARD_SIZE[0]
         pos_y = self.GetSize()[1] // 2 - CARD_SIZE[1] // 2 - CARD_BOTTOM_GAP
         self.card = Card(self.card_drawer, (pos_x, pos_y))
@@ -22,10 +24,12 @@ class CardPanel(wx.Panel):
         self.card['face'].set_bitmap_path(ASSETS_PATH + CLASSIC_FACE)
 
     def bind_events(self):
+        """binds paint and keyboard events"""
         self.Bind(wx.EVT_PAINT, self.on_paint)
         self.Bind(wx.EVT_CHAR_HOOK, self.move_image)
 
     def centralize_card_component(self, keyword):
+        """moves component to make its current position be the center of image"""
         component = self.card[keyword]
         if not component.can_centralize:
             return
@@ -35,6 +39,7 @@ class CardPanel(wx.Panel):
         component.move(self.card['face'].get_position())
 
     def update_card_component(self, keyword):
+        """loads updated bitmap for component by keyword"""
         component = self.card[keyword]
         bitmap = wx.Bitmap(ASSETS_PATH + EDIT_PREFIX + keyword + DEFAULT_EXTENSION)
         if bitmap.GetSize() != EMPTY_BITMAP_SIZE:
@@ -47,6 +52,7 @@ class CardPanel(wx.Panel):
         self.Refresh()
 
     def update_card_image(self):
+        """specifically updates image component"""
         bitmap = wx.Bitmap(ASSETS_PATH + EDIT_IMAGE)
         if bitmap.GetSize() == (1, 1):
             self.card.image.set_bitmap(None)
@@ -62,6 +68,7 @@ class CardPanel(wx.Panel):
         self.Refresh()
 
     def update_card_writable_component(self, keyword, new_content=None):
+        """specifically updates any component with TextBox by keyword"""
         if new_content is None:
             self.card.redact(keyword, self.card[keyword].content)
         else:
@@ -69,6 +76,7 @@ class CardPanel(wx.Panel):
         self.update_card_component(keyword)
 
     def on_text_redacting(self, event: wx.Event):
+        """updates text component if it is redacted"""
         input_text = event.GetEventObject()
         self.card.redact(input_text.keyword, input_text.get_value())
         self.update_card_component(input_text.keyword)
@@ -76,6 +84,7 @@ class CardPanel(wx.Panel):
             self.rearrange_text()
 
     def rearrange_text(self):
+        """spaces text in the card and updates it if changes are made"""
         current_height = 0
         self.card['name'].set_position(CENTER_LINE - self.card['name'].width // 2, UPPER_BORDER)
         current_height += UPPER_BORDER + self.card['name'].height + TEXT_NAME_GAP
@@ -86,6 +95,7 @@ class CardPanel(wx.Panel):
         self.Refresh()
 
     def on_paint(self, event: wx.Event):
+        """draws the whole card by components on the right"""
         dc = wx.BufferedPaintDC(self)
         dc.SetBackground(wx.Brush(wx.WHITE))
         dc.Clear()
@@ -102,9 +112,11 @@ class CardPanel(wx.Panel):
                               component.position[1] + self.card.position[1], True)
 
     def on_image_change(self, event: wx.Event):
+        """fires when image of card is changed"""
         self.setup_image(event.GetEventObject().GetValue())
 
     def setup_image(self, image_path):
+        """changes the image of card"""
         if image_path.split('.')[-1].upper() not in IMAGE_EXTENSIONS:
             return
         self.card_drawer.setup_image(image_path)
@@ -113,6 +125,7 @@ class CardPanel(wx.Panel):
         self.update_card_image()
 
     def move_image(self, event: wx.KeyEvent):
+        """moves images after pressing arrows on keyboard"""
         if self.card.image.bitmap is None:
             return
         keycode = event.GetKeyCode()
@@ -129,6 +142,7 @@ class CardPanel(wx.Panel):
         self.Refresh()
 
     def save_image(self, event=None):
+        """saves image to browsed path with CardDrawer"""
         with wx.FileDialog(self, "Save PNG file", wildcard="PNG files (*.png)|*.png",
                            style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as fileDialog:
             if fileDialog.ShowModal() == wx.ID_CANCEL:

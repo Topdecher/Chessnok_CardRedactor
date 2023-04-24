@@ -3,6 +3,7 @@ from interface import settings
 
 
 class SaveButton(wx.Button):
+    """adds label to Button"""
     def __init__(self, panel, extra_label, extra_label_pos, *args, **kwargs):
         super().__init__(panel, *args, **kwargs)
         self.panel = panel

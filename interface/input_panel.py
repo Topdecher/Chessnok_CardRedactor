@@ -7,11 +7,13 @@ from interface.input_control import LabeledTextCtrl, LabeledRichTextCtrl
 
 
 class InputPanel(wx.Panel):
+    """represent the left side of an app where all inputs are made"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.init_ui()
 
     def init_ui(self):
+        """creates all buttons and text boxes"""
         self.card_power_input = LabeledTextCtrl(self, 'power', 'Сила карты:',
                                                 POWER_LABEL_POS, pos=POWER_POS, size=POWER_SIZE)
         self.card_power_input.SetMaxLength(POWER_MAX_CHARS)

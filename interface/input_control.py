@@ -4,6 +4,7 @@ from interface.settings import *
 
 
 class LabeledTextCtrl(wx.TextCtrl):
+    """adds label to TextCtrl and has convenient keyword"""
     def __init__(self, panel, keyword, label, label_pos, *args, **kwargs):
         super().__init__(panel, *args, **kwargs)
         self.panel = panel
@@ -17,6 +18,7 @@ class LabeledTextCtrl(wx.TextCtrl):
 
 
 class LabeledRichTextCtrl(wx.richtext.RichTextCtrl):
+    """adds label to RichTextCtrl and has convenient keyword"""
     def __init__(self, panel, keyword, label, label_pos, *args, **kwargs):
         super().__init__(panel, *args, **kwargs)
         self.panel = panel

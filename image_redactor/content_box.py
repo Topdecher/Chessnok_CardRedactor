@@ -5,7 +5,10 @@ from image_redactor.constants import *
 
 
 class BitmapBox:
+    """base class for components' holders"""
+
     def __init__(self, bitmap, bitmap_path, default_position=(0, 0), can_centralize=True):
+        """init box holder of card component"""
         self.bitmap = bitmap
         self.bitmap_path = bitmap_path
         self.position = default_position
@@ -49,10 +52,12 @@ class BitmapBox:
 
 
 class TextBox(BitmapBox):
+    """derived class for specifically holding and parsing text images"""
     def __init__(self, bitmap, bitmap_path, content='', font_path=DEFAULT_FONT,
                  default_font_size=DEFAULT_TEXT_FONT_SIZE, min_font_size=MIN_FONT_SIZE,
                  size_step=SIZE_STEP, spacing=SPACING,
                  max_width=MAX_TEXT_WIDTH, max_height=MAX_TEXT_HEIGHT, case=LOWER_CASE, **kwargs):
+        """setups font parameters"""
         super().__init__(bitmap, bitmap_path, **kwargs)
         self.content = content
         self.font = None
@@ -68,6 +73,7 @@ class TextBox(BitmapBox):
         self.text = self.parse_content()
 
     def discard_font_size(self):
+        """discards font size to default"""
         self.font_size = self.default_font_size
 
     def smart_split(self, text):
@@ -89,6 +95,7 @@ class TextBox(BitmapBox):
         return words
 
     def parse_content(self):
+        """parses text by resizing or splitting it to different lines to fit the box"""
         text = ''
         self.discard_font_size()
         while self.font_size >= self.min_font_size:
@@ -131,6 +138,7 @@ class TextBox(BitmapBox):
         return text
 
     def make_too_large_string_error(self):
+        """creates error text if text too large to fit any box"""
         self.font = ImageFont.truetype(font=self.font_path, size=ERROR_FONT_SIZE, encoding='UTF-8')
         text_box = CardDrawer.get_multiline_textbox(TOO_LARGE_STRING, self.font, self.spacing)
         self.width = text_box[2] - text_box[0]
@@ -138,16 +146,19 @@ class TextBox(BitmapBox):
         return TOO_LARGE_STRING
 
     def update_content(self, content):
+        """updates text of this box"""
         self.content = content
         self.text = self.parse_content()
 
 
 class NumberBox(TextBox):
+    """derived class for specifically holding number value"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, default_font_size=DEFAULT_POWER_FONT_SIZE, spacing=0,
                          max_width=MAX_POWER_WIDTH, max_height=MAX_POWER_HEIGHT, **kwargs)
 
     def parse_content(self):
+        """checks if text is number and it is valid number"""
         self.font = ImageFont.truetype(self.font_path, self.font_size, encoding='UTF-8')
         if self.content == '':
             self.width = 0
@@ -165,6 +176,7 @@ class NumberBox(TextBox):
             return self.content
 
     def make_invalid_number_error(self):
+        """creates error text if number text is invalid"""
         text_box = CardDrawer.get_textbox(INVALID_NUMBER, self.font)
         self.width = text_box[2] - text_box[0]
         self.height = text_box[3] - text_box[1]
@@ -172,6 +184,7 @@ class NumberBox(TextBox):
 
 
 class IconBox(BitmapBox):
+    """derived class for specifically holding icons"""
     def __init__(self, pos_x=0, pos_y=0, icon_name=None):
         super().__init__(pos_x, pos_y)
         self.icon_name = icon_name

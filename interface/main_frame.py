@@ -7,6 +7,7 @@ from interface.input_panel import InputPanel
 
 
 class MainFrame(wx.Frame):
+    """the frame where the redacting takes place"""
     def __init__(self):
         super(MainFrame, self).__init__(None, title='Chessnok card redactor', size=(1200, 800))
         self.Center()
@@ -15,6 +16,7 @@ class MainFrame(wx.Frame):
         self.bind_events()
 
     def init_ui(self):
+        """creates all ui such as panels and menu bars"""
         self.create_menu_bar()
         self.card_panel = CardPanel(self.main_panel, pos=(self.GetSize()[0] // 2, 0),
                                     size=(self.GetSize()[0] // 2, self.GetSize()[1]))
@@ -24,11 +26,13 @@ class MainFrame(wx.Frame):
         self.input_panel.SetName('input_panel')
 
     def create_menu_bar(self):
+        """creates menu bar"""
         menubar = wx.MenuBar()
         self.SetMenuBar(menubar)
         menubar.Append(FileMenu(menubar), '&File')
 
     def bind_events(self):
+        """bind events between two panels"""
         self.input_panel.Bind(wx.EVT_TEXT, self.card_panel.on_text_redacting, self.input_panel.card_power_input)
         self.input_panel.Bind(wx.EVT_TEXT, self.card_panel.on_text_redacting, self.input_panel.card_name_input)
         self.input_panel.Bind(wx.EVT_TEXT, self.card_panel.on_text_redacting, self.input_panel.card_text_input)
@@ -37,5 +41,6 @@ class MainFrame(wx.Frame):
         self.main_panel.Bind(wx.EVT_CLOSE, self.on_quit)
 
     def on_quit(self, event):
+        """fires on quit"""
         # self.image_drawer.close_image()
         self.Close()

@@ -4,12 +4,14 @@ from interface import settings
 
 
 class CardDrawer:
+    """support class for more accurate image redacting and more simple file management"""
     def __init__(self, panel, save_path=None):
         self.panel = panel
         self.save_path = save_path
         self.draw = None
 
     def draw_multiline_text(self, text_box, save_path):
+        """updates text image by drawing it in multiple lines"""
         if text_box.text == '':
             image = Image.new('RGBA', (1, 1), (0, 0, 0, 0))
             image.save(settings.ASSETS_PATH + save_path, 'png')
@@ -23,6 +25,7 @@ class CardDrawer:
         image.close()
 
     def draw_text(self, text_box, save_path):
+        """updates text image by drawing it in one line"""
         if text_box.text == '':
             image = Image.new('RGBA', (1, 1), (0, 0, 0, 0))
             image.save(settings.ASSETS_PATH + save_path, 'png')
@@ -35,12 +38,14 @@ class CardDrawer:
         image.close()
 
     def setup_image(self, image_path):
+        """updates image for card"""
         image = Image.open(image_path).copy()
         image.save(settings.ASSETS_PATH + settings.EDIT_IMAGE, 'png')
         image.close()
 
     @staticmethod
     def get_multiline_textbox(text, font, spacing):
+        """returns box of multiline text"""
         empty_image = Image.new('RGBA', settings.CARD_SIZE)
         textbox = ImageDraw.Draw(empty_image).multiline_textbbox((0, 0), text=text, font=font, spacing=spacing)
         empty_image.close()
@@ -48,6 +53,7 @@ class CardDrawer:
 
     @staticmethod
     def get_textbox(text, font):
+        """returns box of single line text"""
         empty_image = Image.new('RGBA', settings.CARD_SIZE)
         textbox = ImageDraw.Draw(empty_image).textbbox((0, 0), text=text, font=font)
         empty_image.close()
@@ -55,6 +61,7 @@ class CardDrawer:
 
     @staticmethod
     def draw_card(card, save_path=None):
+        """draws the card by components and saves it"""
         save_image = Image.new('RGBA', settings.CARD_SIZE)
 
         # image part

@@ -5,7 +5,9 @@ from interface import settings
 
 
 class Card(dict):
+    """just convenient class for holding and updating components"""
     def __init__(self, drawer, position, reference=None):
+        """creates templates for main card components or load them from reference"""
         super().__init__()
         self.drawer = drawer
         self.position = position
@@ -25,6 +27,7 @@ class Card(dict):
             pass
 
     def redact(self, keyword, new_value):
+        """updates any text component by giving a keyword and new value"""
         attribute = self[keyword]
         attribute.update_content(new_value)
         if attribute.spacing == 0:
