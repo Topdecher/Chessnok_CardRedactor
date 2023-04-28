@@ -1,8 +1,20 @@
 # Chessnok_CardRedactor
 Card redactor for beautiful CCG game - Chessnok, which you can visit at https://vk.com/nastolkin_store and read the rules there https://disk.yandex.ru/d/Hznxzy_QqGlXrA.
 Currently it provides only one card face; power, name, and text redacting. You can also adjust different settings in /interface/settings.py.
-To use the redactor you should download the zip file and unpackage it anywhere.
-The app starts from opening main.py in project's folder.
+
+Instruction for "installing" the program:
+1. Download zip file
+2. Unpackage it anywhere
+3. If you don't have python 3.0 or higher - get it. https://www.python.org/downloads/ is enough.
+4. Open terminal on Linux or powershell on Windows.
+5. Type "pip install Pillow", then "pip install wxPython" (without quotes). You may check requirements.txt to find needed packages
+6. Open main.py to run the program. Should work fine with link above.
+7. If you open it by Pycharm or similar IDE and it's not working, you probably should install packages from (5) locally.
+
+Instruction for "updating" the program:
+1. Delete previous version if you feel so.
+2. Repeat (1) and (2) from instruction above.
+3. Skip right to the (6) and (7) if you've done other steps previously.
 
 Insruction for interface:
 1. File at the top-left corner currently does nothing.
